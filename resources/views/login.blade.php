@@ -26,19 +26,20 @@
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
+    @include('admin.layout.includes.alertas')
     <div class="login-logo">
         <a href="../../index2.html"><b>LOC</b>adora</a>
     </div><!-- /.login-logo -->
     <div class="login-box-body">
         <p class="login-box-msg">Acesso para administração</p>
 
-        {!!Form::open(['url'=>'teste'])!!}
+        {!!Form::open(['url'=>'entrar','method'=>'post'])!!}
             <div class="form-group has-feedback">
-                <input type="email" class="form-control" placeholder="Email">
+                <input type="email" class="form-control" name="endemail" placeholder="Email">
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
-                <input type="password" class="form-control" placeholder="Senha">
+                <input type="password" class="form-control" name="password" placeholder="Senha">
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
             <div class="row">
@@ -53,7 +54,7 @@
                     <button type="submit" class="btn btn-primary btn-block btn-flat">Entrar</button>
                 </div><!-- /.col -->
             </div>
-        </form>
+
         {!!Form::close()!!}
 
 
@@ -61,7 +62,9 @@
 
 
     </div><!-- /.login-box-body -->
+
 </div><!-- /.login-box -->
+
 
 <!-- jQuery 2.1.4 -->
 <script src="plugins/jQuery/jQuery-2.1.4.min.js"></script>
