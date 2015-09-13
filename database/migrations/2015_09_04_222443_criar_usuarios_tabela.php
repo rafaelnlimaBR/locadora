@@ -16,8 +16,8 @@ class CriarUsuariosTabela extends Migration
             $tabela->engine = 'InnoDB';
 
             $tabela->increments('id');
-            $tabela->string('pri_nome',60);
-            $tabela->string('seg_nome',60);
+            $tabela->string('nome',60);
+            $tabela->string('apelido',60)->unique();
             $tabela->string('endereco',90)->nullable();
             $tabela->string('numero',25)->nullable();
             $tabela->string('bairro',60)->nullable();

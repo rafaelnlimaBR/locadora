@@ -13,11 +13,13 @@ class GrupoSeed extends Seeder
     {
         DB::table('grupos')->insert([
             'nome'      =>  'Administrador',
-            'usuarios'  =>  '0',
-            'grupos'    =>  '0',
+            'situacao'  =>  1,
+            'usuario'   =>  'a:5:{s:3:"vis";s:1:"1";s:3:"edi";s:1:"1";s:3:"cad";s:1:"1";s:3:"exc";s:1:"1";s:3:"det";s:1:"1";}',
+            'grupo'     =>  'a:5:{s:3:"vis";s:1:"1";s:3:"edi";s:1:"1";s:3:"cad";s:1:"1";s:3:"exc";s:1:"1";s:3:"det";s:1:"1";}',
             'adm'     =>  1,
             'created_at'  =>  new DateTime(),
             'updated_at'  =>  new DateTime(),
         ]);
+
     }
 }

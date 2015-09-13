@@ -41,24 +41,46 @@ class Usuario extends Model implements AuthenticatableContract,
 
 
     public static $restricao = [
-        'primeiro_nome' =>  'required',
-        'segundo_nome'  =>  'required'
+        'nome' =>  'required',
+        'apelido'  =>  'required|unique:usuarios',
+        'email'     =>  'required|email|unique:usuarios',
+        'endereco'  =>  'required'
     ];
     public static $mensagem = [
         'required'    => 'O :attribute é obrigado.',
-
+        'email'     =>  'Email inválido.',
+        'unique'    =>  'O :attribute já existe'
     ];
 
     public function grupo(){
         return $this->belongsTo('App\Grupo');
     }
 
+    public function scopePesquisarPorNome($query, $nome)
+    {
+        return $query->where('nome','like','%'.$nome.'%');
+    }
+
+    public function scopePesquisarPorGrupo($query, $id)
+    {
+        return $query->where('grupo_id','=',$id);
+    }
+
+    public function scopePesquisarPorEmail($query, $email)
+    {
+        return $query->where('email','like','%'.$email.'%');
+    }
+    public function scopePesquisarPorApelido($query, $apelido)
+    {
+        return $query->where('apelido','like','%'.$apelido.'%');
+    }
+
     public static function cadastrar(Request $req)
     {
 
         $usuario            =   new Usuario();
-        $usuario->pri_nome  =   $req->get('primeiro_nome');
-        $usuario->seg_nome  =   $req->get('segundo_nome');
+        $usuario->nome      =   $req->get('nome');
+        $usuario->apelido   =   $req->get('apelido');
         $usuario->cep       =   $req->get('cep');
         $usuario->endereco  =   $req->get('endereco');
         $usuario->numero    =   $req->get('numero');
@@ -80,8 +102,8 @@ class Usuario extends Model implements AuthenticatableContract,
     {
         $usuario = Usuario::find($req->get('id'));
 
-        $usuario->pri_nome  =   $req->get('primeiro_nome');
-        $usuario->seg_nome  =   $req->get('segundo_nome');
+        $usuario->nome      =   $req->get('nome');
+        $usuario->apelido   =   $req->get('apelido');
         $usuario->cep       =   $req->get('cep');
         $usuario->endereco  =   $req->get('endereco');
         $usuario->numero    =   $req->get('numero');
@@ -105,5 +127,15 @@ class Usuario extends Model implements AuthenticatableContract,
         if(!$usuario->delete()){
             return new \Exception('Não foi possível excluir o usuário',200);
         }
+    }
+
+    public static function pesquisar(Request $req)
+    {
+        if($req->get('grupo') == 0){
+            return Usuario::PesquisarPorNome($req->get('nome'))->PesquisarPorEmail($req->get('email'))->PesquisarPorApelido($req->get('apelido'));
+        }else{
+            return Usuario::PesquisarPorNome($req->get('nome'))->PesquisarPorGrupo($req->get('grupo'))->PesquisarPorEmail($req->get('email'))->PesquisarPorApelido($req->get('apelido'));
+        }
+
     }
 }

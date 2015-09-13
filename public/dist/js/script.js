@@ -18,3 +18,6 @@ $('.excluir').click(function(){
     $('#id').val(id);
 
 });
+$('.check-formulario-grupo').change(function () {
+    $(this).find('.corpo-formulario-grupo').hide();
+})

@@ -202,16 +202,7 @@
                         <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                     </a>
                 </li>
-                <li>
-                    <a href="{!! route('usuario.index') !!}">
-                        <i class="fa fa-dashboard"></i> <span>Usuario</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{!! route('grupo.index') !!}">
-                        <i class="fa fa-dashboard"></i> <span>Grupo</span>
-                    </a>
-                </li>
+
 
                 {{--<li class="treeview">--}}
                     {{--<a href="#">--}}
@@ -332,9 +323,9 @@
                     {{--</ul>--}}
                 {{--</li>--}}
                 {{--<li><a href="../../documentation/index.html"><i class="fa fa-book"></i> <span>Documentation</span></a></li>--}}
-                {{--<li class="header">LABELS</li>--}}
-                {{--<li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>--}}
-                {{--<li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>--}}
+                <li class="header">SISTEMA</li>
+                <li><a href="{!! route('usuario.index') !!}"><i class="fa fa-user text-yellow"></i> <span>Usuario</span></a></li>
+                <li><a href="{!! route('grupo.index') !!}"><i class="fa fa-users text-yellow"></i> <span>Grupo</span></a></li>
                 {{--<li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>--}}
             </ul>
         </section>

@@ -15,17 +15,29 @@
             <div class="box-header">
                 <h3 class="box-title">Titulo Pagina</h3>
                 <div class="row">
-                    {!! Form::open() !!}
-                        <div class="form-group col-xs-6">
+                    {!! Form::open(['route'=>['usuario.pesquisa'],'method'=>'post']) !!}
+                        <div class="form-group col-xs-3">
 
-                            {!! Form::label('pesquisa','Pesquisa') !!}
-                            {!! Form::text('pesquisa','',['class'=>'form-control cep',]) !!}
+                            {!! Form::label('nome','Nome') !!}
+                            {!! Form::text('nome','',['class'=>'form-control cep',]) !!}
+
+                        </div>
+                        <div class="form-group col-xs-2">
+
+                            {!! Form::label('apelido','Apelido') !!}
+                            {!! Form::text('apelido','',['class'=>'form-control cep',]) !!}
+
+                        </div>
+                        <div class="form-group col-xs-3">
+
+                            {!! Form::label('email','Email') !!}
+                            {!! Form::text('email','',['class'=>'form-control cep',]) !!}
 
                         </div>
                         <div class="form-group col-xs-3">
 
                             {!! Form::label('grupo','Grupo') !!}
-                            {!! Form::select('grupo',$grupos, '', ['class'=>'form-control']) !!}
+                            {!! Form::select('grupo',([0=>"Todos"]+$grupos), 0, ['class'=>'form-control']) !!}
 
                         </div>
                         <div class="form-group col-xs-1 pull-right">
@@ -40,14 +52,13 @@
                 <table id="example2" class="table table-bordered table-hover">
                     <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Nome</th>
-                        <th>Grupo</th>
+                        <th style="width:3%">ID</th>
+                        <th style="width:30%">Nome</th>
+                        <th style="width:10%">Grupo</th>
                         <th>Email</th>
-                        <th>Endereço</th>
                         <th>Situação</th>
                         <th>Criado</th>
-                        <th style="width:125px"></th>
+                        <th style="width:13%"></th>
 
                     </tr>
                     </thead>
@@ -55,14 +66,13 @@
                     @foreach($usuarios as $usuario)
                     <tr>
                         <td>{!! $usuario->id !!}</td>
-                        <td>{!! $usuario->pri_nome !!}</td>
+                        <td>{!! $usuario->nome !!}</td>
                         <td>{!! $usuario->grupo->nome !!}</td>
                         <td>{!! $usuario->email !!}</td>
-                        <td>{!! $usuario->endereco !!}</td>
                         <td>{!! ($usuario->situacao == 0? "<h6 class='inf inf-danger'>Inativo</h6>":"<h6 class='inf inf-success'>Ativo</h6>") !!}</td>
                         <td>{!! $usuario->created_at !!}</td>
                         <td>
-                            <a href="#" class="btn btn-social-icon btn-info"><i class="fa fa-eye"></i></a>
+                            <a href="{!! route('usuario.detalhes',['id'=>$usuario->id]) !!}" class="btn btn-social-icon btn-info"><i class="fa fa-eye"></i></a>
                             <a href="{!! route('usuario.editar',['id'=>$usuario->id]) !!}" class="btn btn-social-icon btn-success"><i class="fa fa-edit"></i></a>
                             <a href="#" class="btn btn-social-icon btn-danger excluir" data-toggle="modal" data-target="#form-excluir" excluir="{!! $usuario->id !!}"><i class="fa fa-trash-o"></i></a>
                         </td>
@@ -75,7 +85,6 @@
                         <th>Nome</th>
                         <th>Grupo</th>
                         <th>Email</th>
-                        <th>Endereço</th>
                         <th>Situação</th>
                         <th>Criado</th>
                         <td></td>

@@ -27,7 +27,7 @@ class UsuarioController extends Controller
 
     public function index(){
         $usuarios = Usuario::paginate(15);
-        return \View::make('admin.usuario.index')->with('usuarios',$usuarios);
+        return view('admin.usuario.index')->with('usuarios',$usuarios);
     }
     public function novo(){
         return \View::make('admin.usuario.novo');
@@ -88,7 +88,14 @@ class UsuarioController extends Controller
         if($usuario == null){
             return redirect()->route('usuario.index')->with('alerta',['tipo'=>'warning','msg'=>'Nenhum registro foi localizado','icon'=>'ban']);
         }
-//        return view('admin.usuario.edicao')->with('usuario',$usuario);
+        return view('admin.usuario.detalhe')->with('usuario',$usuario);
+    }
+
+    public function pesquisa()
+    {
+        $usuario = Usuario::pesquisar(request())->paginate(15);
+
+        return view('admin.usuario.index')->with('usuarios',$usuario);
     }
 
 }

@@ -26,7 +26,6 @@ Route::post('entrar','Auth\AcessoController@postEntrar');
 //Route::group(['middleware'=>'auth','prefix'=>'admin'],function(){
 Route::group(['prefix'=>'admin'],function(){
 
-//    Route::controller('dashboard','Admin\DashboardController');
 
     Route::get('dashboard',['as'=>'dashboard','uses'=>'Admin\DashboardController@index']);
     Route::get('sair',['as'=>'sair','uses'=>'Auth\AcessoController@sair']);
@@ -39,6 +38,9 @@ Route::group(['prefix'=>'admin'],function(){
     Route::post('usuario/atualizar',   ['as'=>'usuario.atualizar','uses'=>'Admin\UsuarioController@atualizar']);
     Route::post('usuario/excluir',   ['as'=>'usuario.excluir','uses'=>'Admin\UsuarioController@excluir']);
     Route::get('usuario/detalhes/{id}', ['as'=>'usuario.detalhes','uses'=>'Admin\UsuarioController@detalhes']);
+    Route::post('usuario', ['as'=>'usuario.pesquisa','uses'=>'Admin\UsuarioController@pesquisa']);
+
+
 
 //    Rotas Grupo
     Route::get('grupo',['as'=>'grupo.index','uses'=>'Admin\GrupoController@index']);
@@ -47,6 +49,8 @@ Route::group(['prefix'=>'admin'],function(){
     Route::get('grupo/editar/{id}',['as'=>'grupo.editar','uses'=>'Admin\GrupoController@editar']);
     Route::post('grupo/atualizar',['as'=>'grupo.atualizar','uses'=>'Admin\GrupoController@atualizar']);
     Route::post('grupo/excluir',['as'=>'grupo.excluir','uses'=>'Admin\GrupoController@excluir']);
+    Route::get('grupo/detalhes/{id}',['as'=>'grupo.detalhes','uses'=>'Admin\GrupoController@detalhes']);
+    Route::post('grupo',['as'=>'grupo.pesquisa','uses'=>'Admin\GrupoController@pesquisa']);
 
     View::composer(['admin.usuario.includes.formulario','admin.usuario.index'],function($view) {
         $grupos = \App\Grupo::all();
@@ -57,5 +61,6 @@ Route::group(['prefix'=>'admin'],function(){
         }
         $view->with('grupos',$dados);
     });
+
 });
 

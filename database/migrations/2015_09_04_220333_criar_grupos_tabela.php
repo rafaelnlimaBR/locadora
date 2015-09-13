@@ -17,9 +17,10 @@ class CriarGruposTabela extends Migration
 
             $tabela->increments('id');
             $tabela->string('nome',90)->unique();
+            $tabela->text('usuario');
+            $tabela->text('grupo');
+            $tabela->boolean('situacao');
             $tabela->boolean('adm')->default(0);
-            $tabela->text('usuarios');
-            $tabela->text('grupos');
             $tabela->timestamps();
         });
     }

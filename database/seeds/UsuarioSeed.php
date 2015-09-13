@@ -14,8 +14,8 @@ class UsuarioSeed extends Seeder
         $idAdm = \App\Grupo::admin()->id;
 
         DB::table('usuarios')->insert([
-            'pri_nome'  =>  'Admin',
-            'seg_nome'  =>  'Admin',
+            'nome'  =>  'Admin',
+            'apelido'  =>  'Admin',
             'grupo_id'  =>  $idAdm,
             'email'     =>  'rafaelnlima@live.com',
             'situacao'      =>  1,

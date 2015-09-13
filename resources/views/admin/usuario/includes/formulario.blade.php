@@ -1,19 +1,19 @@
 
 
 <div class="row">
-    <div class="form-group col-xs-6">
+    <div class="form-group col-xs-8">
 
         @if(isset($usuario))
             {!! Form::hidden('id',$usuario->id) !!}
         @endif
-        {!! Form::label('primeiro_nome','Primero Nome') !!}
-        {!! Form::text('primeiro_nome',(isset($usuario)?$usuario->pri_nome:''),['class'=>'form-control',]) !!}
-        {!! ($errors->has('primeiro_nome')? "<p class='msg-alerta'>".$errors->first('primeiro_nome')."</p>":"") !!}
+        {!! Form::label('nome','Nome Completo') !!}
+        {!! Form::text('nome',(isset($usuario)?$usuario->pri_nome:''),['class'=>'form-control',]) !!}
+        {!! ($errors->has('nome')? "<p class='msg-alerta'>".$errors->first('nome')."</p>":"") !!}
     </div>
-    <div class="form-group col-xs-6">
-        {!! Form::label('segundo_nome','Segundo Nome') !!}
-        {!! Form::text('segundo_nome',(isset($usuario)?$usuario->seg_nome:''),['class'=>'form-control',]) !!}
-        {!! ($errors->has('segundo_nome')? "<p class='msg-alerta'>".$errors->first('segundo_nome')."</p>":"") !!}
+    <div class="form-group col-xs-4">
+        {!! Form::label('apelido','Apelido') !!}
+        {!! Form::text('apelido',(isset($usuario)?$usuario->seg_nome:''),['class'=>'form-control',]) !!}
+        {!! ($errors->has('apelido')? "<p class='msg-alerta'>".$errors->first('apelido')."</p>":"") !!}
     </div>
 </div>
 <div class="row">
