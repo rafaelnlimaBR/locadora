@@ -7,6 +7,9 @@
                 {!! Form::open(['route'=>['grupo.atualizar'],'method'=>'post']) !!}
                 <div class="box-header with-border">
                     <h3 class="box-title">Pagina teste</h3>
+                    @if(isset($grupo))
+                        <small class="pull-right">Criado : {!! date_format($grupo->created_at, 'd/m/Y H:i:s') !!}</small>
+                    @endif
                 </div>
                 <div class="box-body">
 

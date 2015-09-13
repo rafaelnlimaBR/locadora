@@ -8,7 +8,7 @@
                     <div class="box-title">
                         #{!! $grupo->id !!} | Detalhes
                     </div>
-                    <small class="pull-right">Criado : {!! $grupo->created_at !!}</small>
+                    <small class="pull-right">Criado : {!! date_format($grupo->created_at, 'd/m/Y H:i:s') !!}</small>
                 </div>
                 <div class="box-body">
 

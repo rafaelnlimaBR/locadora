@@ -36,9 +36,9 @@
                         <thead>
                         <tr>
                             <th style="width: 5%">ID</th>
-                            <th style="width: 57%">Nome</th>
+                            <th style="width: 62%">Nome</th>
                             <th style="width: 9%">Situação</th>
-                            <th style="width: 15%">Criado</th>
+                            <th style="width: 10%">Criado</th>
                             <th style="width: 20%;"></th>
 
                         </tr>
@@ -50,7 +50,7 @@
                                 <td>{!! $grupo->nome !!}</td>
                                 <td>{!! ($grupo->situacao == 0? "<h6 class='inf inf-danger'>Inativo</h6>":"<h6 class='inf inf-success'>Ativo</h6>") !!}</td>
 
-                                <td>{!! $grupo->created_at !!}</td>
+                                <td>{!! date_format($grupo->created_at ,'d/m/Y') !!}</td>
                                 <td>
                                     <a href="{!! route('grupo.detalhes',['id'=>$grupo->id]) !!}" class="btn btn-social-icon btn-info"><i class="fa fa-eye"></i></a>
                                     <a href="{!! route('grupo.editar',['id'=>$grupo->id]) !!}" class="btn btn-social-icon btn-success"><i class="fa fa-edit"></i></a>

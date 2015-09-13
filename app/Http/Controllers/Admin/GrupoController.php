@@ -21,6 +21,12 @@ class GrupoController extends Controller
         return view('admin.grupo.novo');
     }
     public function cadastrar(){
+        $validacao = \Validator::make(request()->all(),Grupo::$restricao, Grupo::$mensagem);
+
+        if($validacao->fails()){
+            return redirect()->route('grupo.novo')->withErrors($validacao)->withInput();
+        }
+
         try{
 
             Grupo::cadastrar(request());

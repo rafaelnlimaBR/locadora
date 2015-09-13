@@ -15,6 +15,13 @@ use Illuminate\Http\Request;
 class Grupo extends Model
 {
 
+    public static $restricao = [
+        'nome' =>  'required|unique:grupos',
+    ];
+    public static $mensagem = [
+        'required'    => 'O :attribute é obrigado.',
+        'unique'      =>    'Esse :attribute já existe',
+    ];
     public function usuarios(){
         return $this->hasMany('usuarios')->get();
     }

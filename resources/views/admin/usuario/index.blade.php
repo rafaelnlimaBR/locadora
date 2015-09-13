@@ -70,7 +70,7 @@
                         <td>{!! $usuario->grupo->nome !!}</td>
                         <td>{!! $usuario->email !!}</td>
                         <td>{!! ($usuario->situacao == 0? "<h6 class='inf inf-danger'>Inativo</h6>":"<h6 class='inf inf-success'>Ativo</h6>") !!}</td>
-                        <td>{!! $usuario->created_at !!}</td>
+                        <td>{!! date_format($usuario->created_at , 'd/m/Y') !!}</td>
                         <td>
                             <a href="{!! route('usuario.detalhes',['id'=>$usuario->id]) !!}" class="btn btn-social-icon btn-info"><i class="fa fa-eye"></i></a>
                             <a href="{!! route('usuario.editar',['id'=>$usuario->id]) !!}" class="btn btn-social-icon btn-success"><i class="fa fa-edit"></i></a>

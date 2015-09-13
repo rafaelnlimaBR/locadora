@@ -7,6 +7,9 @@
                 {!! Form::model($usuario,['route'=>['usuario.atualizar'],'method'=>'post']) !!}
                 <div class="box-header with-border">
                     <h3 class="box-title">Pagina teste</h3>
+                    @if(isset($usuario))
+                        <small class="pull-right">Criado : {!! date_format($usuario->created_at, 'd/m/Y H:i:s') !!}</small>
+                    @endif
                 </div>
                 <div class="box-body">
 
