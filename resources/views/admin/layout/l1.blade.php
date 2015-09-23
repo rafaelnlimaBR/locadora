@@ -3,13 +3,14 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Locadora </title>
+    <title>{!! \App\Configuracao::getConf()->breve !!} </title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
     {!! Html::style('bootstrap/css/bootstrap.min.css') !!}
 
     <!-- Font Awesome -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <!-- Ionicons -->
@@ -30,17 +31,23 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
+{!! Html::script('plugins/jQuery/jQuery-2.1.4.min.js') !!}
+{{--<script src="//code.jquery.com/jquery-1.10.2.js"></script>--}}
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
 <body class="hold-transition skin-green sidebar-mini">
+{!! Form::hidden('url', URL::to(''),['id'=>'url']) !!}
 <!-- Site wrapper -->
 <div class="wrapper">
 
     <header class="main-header">
         <!-- Logo -->
+
         <a href="../../index2.html" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
-            <span class="logo-mini"><b>LOC</b>ar</span>
+            <span class="logo-mini">{!! \App\Configuracao::getConf()->breve !!}</span>
             <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg"><b>LOC</b>ar</span>
+            <span class="logo-lg">{!! \App\Configuracao::getConf()->breve !!}</span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
@@ -204,24 +211,33 @@
                 </li>
 
 
-                {{--<li class="treeview">--}}
-                    {{--<a href="#">--}}
-                        {{--<i class="fa fa-files-o"></i>--}}
-                        {{--<span>Layout Options</span>--}}
-                        {{--<span class="label label-primary pull-right">4</span>--}}
-                    {{--</a>--}}
-                    {{--<ul class="treeview-menu">--}}
-                        {{--<li><a href="../layout/top-nav.html"><i class="fa fa-circle-o"></i> Top Navigation</a></li>--}}
-                        {{--<li><a href="../layout/boxed.html"><i class="fa fa-circle-o"></i> Boxed</a></li>--}}
-                        {{--<li><a href="../layout/fixed.html"><i class="fa fa-circle-o"></i> Fixed</a></li>--}}
-                        {{--<li><a href="../layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>--}}
-                    {{--</ul>--}}
-                {{--</li>--}}
-                {{--<li>--}}
-                    {{--<a href="../widgets.html">--}}
-                        {{--<i class="fa fa-th"></i> <span>Widgets</span> <small class="label pull-right bg-green">Hot</small>--}}
-                    {{--</a>--}}
-                {{--</li>--}}
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-car"></i>
+                        <span>Veículo</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{!! route('veiculo.index') !!}"><i class="fa fa-circle-o"></i> Veículo</a></li>
+                        <li><a href="{!! route('classe.index') !!}"><i class="fa fa-circle-o"></i> Classe</a></li>
+                        <li><a href="{!! route('marca.index') !!}"><i class="fa fa-circle-o"></i> Marca</a></li>
+                        <li><a href="{!! route('modelo.index') !!}"><i class="fa fa-circle-o"></i> Modelo</a></li>
+                        <li><a href="{!! route('patio.index') !!}"><i class="fa fa-circle-o"></i> Patio</a></li>
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-wrench"></i>
+                        <span>Reparo</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{!! route('veiculo.index') !!}"><i class="fa fa-circle-o"></i> Reparo</a></li>
+                        <li><a href="{!! route('classe.index') !!}"><i class="fa fa-circle-o"></i> Status</a></li>
+                        <li><a href="{!! route('classe.index') !!}"><i class="fa fa-circle-o"></i> Oficina</a></li>
+                    </ul>
+                </li>
+
                 {{--<li class="treeview">--}}
                     {{--<a href="#">--}}
                         {{--<i class="fa fa-pie-chart"></i>--}}
@@ -326,6 +342,7 @@
                 <li class="header">SISTEMA</li>
                 <li><a href="{!! route('usuario.index') !!}"><i class="fa fa-user text-yellow"></i> <span>Usuario</span></a></li>
                 <li><a href="{!! route('grupo.index') !!}"><i class="fa fa-users text-yellow"></i> <span>Grupo</span></a></li>
+                <li><a href="{!! route('conf.edicao') !!}"><i class="fa  fa-cog text-yellow"></i> <span>Configuração</span></a></li>
                 {{--<li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>--}}
             </ul>
         </section>
@@ -369,7 +386,7 @@
         <div class="pull-right hidden-xs">
             <b>Versão</b> 1.0.0
         </div>
-        <strong>Copyright &copy; 2014-2015 <a href="#">Rafael Lima</a>.</strong> Todos os direitos reservados.
+        <strong>Copyright &copy; 2014-2015 <a href="#">Rafael Lima</a>.</strong> Todos os direitos reservados | {!! \App\Configuracao::getConf()->empresa !!}
     </footer>
 
     <!-- Control Sidebar -->
@@ -541,7 +558,6 @@
 </div><!-- ./wrapper -->
 
 <!-- jQuery 2.1.4 -->
-{!! Html::script('plugins/jQuery/jQuery-2.1.4.min.js') !!}
 
 <!-- Bootstrap 3.3.5 -->
 {!! Html::script('bootstrap/js/bootstrap.min.js') !!}

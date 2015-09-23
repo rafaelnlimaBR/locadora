@@ -40,18 +40,26 @@ class Usuario extends Model implements AuthenticatableContract,
 
 
 
-    public static $restricao = [
+    private static $restricao = [
         'nome' =>  'required',
         'apelido'  =>  'required|unique:usuarios',
         'email'     =>  'required|email|unique:usuarios',
         'endereco'  =>  'required'
     ];
-    public static $mensagem = [
+    private static $mensagem = [
         'required'    => 'O :attribute é obrigado.',
         'email'     =>  'Email inválido.',
         'unique'    =>  'O :attribute já existe'
     ];
 
+    public static function validacao($dados)
+    {
+        if(array_key_exists('id',$dados)){
+            static::$restricao['apelido'] .= ',apelido,'.$dados['id'];
+            static::$restricao['email'] .= ',email,'.$dados['id'];
+        }
+        return \Validator::make($dados,static::$restricao,static::$mensagem);
+    }
     public function grupo(){
         return $this->belongsTo('App\Grupo');
     }

@@ -11,17 +11,26 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class Grupo extends Model
 {
 
-    public static $restricao = [
+    private static $restricao = [
         'nome' =>  'required|unique:grupos',
     ];
-    public static $mensagem = [
+    private static $mensagem = [
         'required'    => 'O :attribute é obrigado.',
         'unique'      =>    'Esse :attribute já existe',
     ];
+
+    public static function validacao($dados)
+    {
+        if(array_key_exists('id',$dados)){
+            static::$restricao['nome'] .= ',nome,'.$dados['id'];
+        }
+        return \Validator::make($dados, static::$restricao,static::$mensagem);
+    }
     public function usuarios(){
         return $this->hasMany('usuarios')->get();
     }
@@ -53,8 +62,8 @@ class Grupo extends Model
             'det'   =>  $req->get('gru-det')
         ]);
         $grupo->situacao = $req->situacao;
-        if(!$grupo->save()){
-            return new \Exception('Não foi possível cadastrar.',200);
+        if(!$grupo->save() == false){
+            throw  new \Exception('Não foi possível cadastrar.',200);
         }
     }
 
@@ -77,8 +86,8 @@ class Grupo extends Model
             'det'   =>  $req->get('gru-det')
         ]);
         $grupo->situacao = $req->situacao;
-        if(!$grupo->save()){
-            return new \Exception('Não foi possível cadastrar.',200);
+        if(!$grupo->save() == false){
+            throw new \Exception('Não foi possível cadastrar.',200);
         }
     }
 
@@ -86,8 +95,8 @@ class Grupo extends Model
     {
         $grupo = Grupo::find($req->get('id'));
 
-        if(!$grupo->delete()){
-            new \Exception('Não foi possível excluir esse registro',200);
+        if(!$grupo->delete() == false){
+            throw new \Exception('Não foi possível excluir esse registro',200);
         }
     }
 

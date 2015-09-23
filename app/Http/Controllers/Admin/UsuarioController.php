@@ -34,7 +34,7 @@ class UsuarioController extends Controller
     }
     public function cadastrar(){
 
-        $validacao = \Validator::make(request()->all(),Usuario::$restricao, Usuario::$mensagem);
+        $validacao = Usuario::validacao(request()->all());
 
         if($validacao->fails()){
             return redirect()->route('usuario.novo')->withErrors($validacao)->withInput();
@@ -65,6 +65,12 @@ class UsuarioController extends Controller
         return view('admin.usuario.edicao')->with('usuario',$usuario);
     }
     public function atualizar(){
+        $validacao = Usuario::validacao(request()->all());
+
+        if($validacao->fails()){
+            return redirect()->route('usuario.editar',['id'=>request()->get('id')])->withErrors($validacao)->withInput();
+        }
+
         try {
             Usuario::atualizar(request());
             return redirect()->route('usuario.index')->with('alerta',['tipo'=>'success','msg'=>'Editado com sucesso.','icon'=>'check']);
