@@ -11,7 +11,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class StatusReparos extends Model
+class StatusReparo extends Model
 {
     protected $table    =   'status_reparos';
 }

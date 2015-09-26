@@ -96,6 +96,11 @@
                     {!! Form::select('disponivel_veiculo',$statusVeiculos, (isset($conf)?$conf->veiculo_disponivel :1), ['class'=>'form-control']) !!}
                     {!! ($errors->has('disponivel_veiculo')? "<p class='msg-alerta'>".$errors->first('disponivel_veiculo')."</p>":"") !!}
                 </div>
+                <div class="form-group col-xs-2">
+                    {!! Form::label('indisponivel_veiculo','Indisponível') !!}
+                    {!! Form::select('indisponivel_veiculo',$statusVeiculos, (isset($conf)?$conf->veiculo_indisponivel :1), ['class'=>'form-control']) !!}
+                    {!! ($errors->has('indisponivel_veiculo')? "<p class='msg-alerta'>".$errors->first('indisponivel_veiculo')."</p>":"") !!}
+                </div>
             </div>
         </div>
     </div>
@@ -125,6 +130,72 @@
 
                 </div>
 
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingTwo">
+            <h4 class="panel-title">
+                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#cliente" aria-expanded="false" aria-controls="reparo">
+                    Cliente
+                </a>
+            </h4>
+        </div>
+        <div id="cliente" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+            <div class="panel-body">
+                <div class="form-group col-xs-2">
+                    {!! Form::label('novo_cliente','Novo') !!}
+                    {!! Form::select('novo_cliente',$statusClientes, (isset($conf)?$conf->novo_cliente :1), ['class'=>'form-control']) !!}
+
+                </div>
+                <div class="form-group col-xs-2">
+                    {!! Form::label('pre_cliente','Pre-Cadastrado') !!}
+                    {!! Form::select('pre_cliente',$statusClientes, (isset($conf)?$conf->pre_cliente :1), ['class'=>'form-control']) !!}
+
+                </div>
+                <div class="form-group col-xs-2">
+                    {!! Form::label('inadimplente_cliente','Inadimplante') !!}
+                    {!! Form::select('inadimplente_cliente',$statusClientes, (isset($conf)?$conf->inadimplente_cliente :1), ['class'=>'form-control']) !!}
+
+                </div>
+                <div class="form-group col-xs-2">
+                    {!! Form::label('indisponivel_cliente','Indisponível') !!}
+                    {!! Form::select('indisponivel_cliente',$statusClientes, (isset($conf)?$conf->indisponivel_cliente :1), ['class'=>'form-control']) !!}
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingTwo">
+            <h4 class="panel-title">
+                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#contrato" aria-expanded="false" aria-controls="reparo">
+                    Contrato
+                </a>
+            </h4>
+        </div>
+        <div id="contrato" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+            <div class="panel-body">
+                <div class="form-group col-xs-2">
+                    {!! Form::label('locado_contrato','Locado') !!}
+                    {!! Form::select('locado_contrato',$statusContratos, (isset($conf)?$conf->locado_contrato :1), ['class'=>'form-control']) !!}
+
+                </div>
+                <div class="form-group col-xs-2">
+                    {!! Form::label('cancelado_contrato','Cancelado') !!}
+                    {!! Form::select('cancelado_contrato',$statusContratos, (isset($conf)?$conf->cancelado_contrato :1), ['class'=>'form-control']) !!}
+
+                </div>
+                <div class="form-group col-xs-2">
+                    {!! Form::label('concluido_contrato','Concluido') !!}
+                    {!! Form::select('concluido_contrato',$statusContratos, (isset($conf)?$conf->concluido_contrato :1), ['class'=>'form-control']) !!}
+
+                </div>
+                <div class="form-group col-xs-2">
+                    {!! Form::label('pre_contrato','Pre-Reservado') !!}
+                    {!! Form::select('pre_contrato',$statusContratos, (isset($conf)?$conf->pre_contrato :1), ['class'=>'form-control']) !!}
+
+                </div>
             </div>
         </div>
     </div>

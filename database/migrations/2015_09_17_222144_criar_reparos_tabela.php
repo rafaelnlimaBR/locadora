@@ -21,8 +21,10 @@ class CriarReparosTabela extends Migration
             $tabela->integer('status_id')->unsigned();
             $tabela->text('defeito');
             $tabela->text('solucao');
-            $tabela->decimal('valor',10,2);
+            $tabela->decimal('valor',10,2)->nullable();
+            $tabela->timestamp('entrega')->nullable();
             $tabela->timestamps();
+
             $tabela->foreign('oficina_id')->references('id')->on('oficinas');
             $tabela->foreign('veiculo_id')->references('id')->on('veiculos');
             $tabela->foreign('status_id')->references('id')->on('status_reparos');

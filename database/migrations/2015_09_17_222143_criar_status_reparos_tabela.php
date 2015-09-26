@@ -18,7 +18,7 @@ class CriarStatusReparosTabela extends Migration
             $tabela->increments('id');
             $tabela->string('nome',100);
             $tabela->text('descricao');
-            $tabela->string('backgroud',100);
+            $tabela->string('cor',100);
             $tabela->timestamps();
         });
     }

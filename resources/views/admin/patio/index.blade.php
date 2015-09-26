@@ -36,10 +36,12 @@
                         <thead>
                         <tr>
                             <th style="width: 5%">ID</th>
-                            <th style="width: 62%">Nome</th>
+                            <th style="width: 33%">Nome</th>
+                            <th style="width: 20%">Cidade</th>
+                            <th style="width: 10%">Estado</th>
                             <th style="width: 9%">Situação</th>
                             <th style="width: 10%">Criado</th>
-                            <th style="width: 20%;"></th>
+                            <th style="width: 30%;"></th>
 
                         </tr>
                         </thead>
@@ -48,6 +50,8 @@
                             <tr>
                                 <td>{!! $r->id !!}</td>
                                 <td>{!! $r->nome !!}</td>
+                                <td>{!! $r->cidade !!}</td>
+                                <td>{!! $r->estado !!}</td>
                                 <td>{!! ($r->situacao == 0? "<h6 class='inf inf-danger'>Inativo</h6>":"<h6 class='inf inf-success'>Ativo</h6>") !!}</td>
                                 <td>{!! date_format($r->created_at, 'd/m/Y') !!}</td>
                                 <td>
@@ -62,6 +66,8 @@
                         <tr>
                             <th>ID</th>
                             <th>Nome</th>
+                            <th>Cidade</th>
+                            <th>Estado</th>
                             <th>Situação</th>
                             <th>Criado</th>
                             <th></th>

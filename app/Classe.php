@@ -34,6 +34,11 @@ class Classe extends Model
         return \Validator::make($data, static::$rules, static::$mensagens);
     }
 
+    public function patios()
+    {
+        return $this->belongsToMany('App\Patio','veiculos','classe_id');
+    }
+    
     public function scopePesquisarPorNome($query, $nome)
     {
         return $query->where('nome','like','%'.$nome.'%');

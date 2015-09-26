@@ -15,6 +15,11 @@
 
                     @include('admin.veiculo.includes.formulario')
 
+                    @if($veiculo->status_id == \App\Configuracao::getConf()->veiculo_disponivel)
+                        <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#form-indisponivel">Indisponibilizar</a>
+                    @elseif($veiculo->status_id == \App\Configuracao::getConf()->veiculo_indisponivel)
+                        <a href="#" class="btn btn-success" data-toggle="modal" data-target="#form-disponivel">Disponibilizar</a>
+                    @endif
                 </div>
                 <div class="box-footer">
                     <a href="{!! route('veiculo.index') !!}" class="btn btn-app"><i class="fa fa-mail-reply"></i>Voltar</a>
@@ -22,10 +27,14 @@
 
                 </div>
                 {!! Form::close() !!}
+
             </div>
         </div>
 
     </div>
+
+@include('admin.veiculo.includes.disponivel')
+@include('admin.veiculo.includes.indisponivel')
 
 
 @endsection

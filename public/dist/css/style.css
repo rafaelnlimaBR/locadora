@@ -26,3 +26,18 @@ label{
     margin: 0;
     padding: 0;
 }
+.bg{
+    box-sizing: border-box;
+    color: #ffffff;
+    background-color: #fff;
+    border-radius: 4px;
+    display: inline-block;
+    font-weight: 600;
+    padding: 5px
+}
+.bg-gray-low{
+    background: #ebebeb;
+}
+.timeline{
+    padding: 10px;
+}

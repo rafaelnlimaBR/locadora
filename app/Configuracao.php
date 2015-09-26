@@ -39,10 +39,22 @@ class Configuracao extends Model
         $conf->veiculo_prereservado     =   $req->get('prereservado_veiculo');
         $conf->veiculo_reservado        =   $req->get('reservado_veiculo');
         $conf->veiculo_disponivel        =   $req->get('disponivel_veiculo');
+        $conf->veiculo_indisponivel        =   $req->get('indisponivel_veiculo');
 
         $conf->reparo_novo              =   $req->get('novo_reparo');
         $conf->reparo_cancelado              =   $req->get('cancelado_reparo');
         $conf->reparo_concluido            =   $req->get('finalizado_reparo');
+
+        $conf->novo_cliente              =   $req->get('novo_cliente');
+        $conf->pre_cliente              =   $req->get('pre_cliente');
+        $conf->inadimplente_cliente            =   $req->get('inadimplente_cliente');
+        $conf->indisponivel_cliente            =   $req->get('indisponivel_cliente');
+
+        $conf->locado_contrato              =   $req->get('locado_contrato');
+        $conf->cancelado_contrato           =   $req->get('cancelado_contrato');
+        $conf->concluido_contrato           =   $req->get('concluido_contrato');
+        $conf->pre_contrato                 =   $req->get('pre_contrato');
+
 
         if($conf->save() == false){
             throw new \Exception('Não foi possível realizar a alteração');

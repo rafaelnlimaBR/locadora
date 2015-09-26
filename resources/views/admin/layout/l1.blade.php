@@ -22,7 +22,7 @@
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     {!! Html::style('dist/css/skins/_all-skins.min.css') !!}
-
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -210,7 +210,11 @@
                     </a>
                 </li>
 
-
+                <li>
+                    <a href="{!! route('cliente.index') !!}">
+                        <i class="fa fa-user"></i> <span>Cliente</span>
+                    </a>
+                </li>
                 <li class="treeview">
                     <a href="#">
                         <i class="fa fa-car"></i>
@@ -232,9 +236,23 @@
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="{!! route('veiculo.index') !!}"><i class="fa fa-circle-o"></i> Reparo</a></li>
-                        <li><a href="{!! route('classe.index') !!}"><i class="fa fa-circle-o"></i> Status</a></li>
-                        <li><a href="{!! route('classe.index') !!}"><i class="fa fa-circle-o"></i> Oficina</a></li>
+                        <li><a href="{!! route('reparo.index') !!}"><i class="fa fa-circle-o"></i> Reparo</a></li>
+                        <li><a href="{!! route('oficina.index') !!}"><i class="fa fa-circle-o"></i> Oficina</a></li>
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-newspaper-o"></i>
+                        <span>Contrato</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{!! route('contrato.index') !!}"><i class="fa fa-circle-o"></i> Contrato</a></li>
+                        <li><a href="{!! route('oficina.index') !!}"><i class="fa fa-circle-o"></i> Multa</a></li>
+                        <li><a href="{!! route('acessorio.index') !!}"><i class="fa fa-circle-o"></i> Acessório</a></li>
+                        <li><a href="{!! route('oficina.index') !!}"><i class="fa fa-circle-o"></i> Promoção</a></li>
+                        <li><a href="{!! route('oficina.index') !!}"><i class="fa fa-circle-o"></i> Taxa</a></li>
+                        <li><a href="{!! route('oficina.index') !!}"><i class="fa fa-circle-o"></i> Seguro</a></li>
                     </ul>
                 </li>
 

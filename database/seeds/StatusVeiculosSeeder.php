@@ -46,5 +46,12 @@ class StatusVeiculosSeeder extends Seeder
             'created_at'  =>  new DateTime(),
             'updated_at'  =>  new DateTime(),
         ]);
+        DB::table('status_veiculos')->insert([
+            'nome'      =>  'Indisponível',
+            'cor'       =>  '#000000',
+            'descricao' =>  'Status para quando o veículo estiver indisponivel',
+            'created_at'  =>  new DateTime(),
+            'updated_at'  =>  new DateTime(),
+        ]);
     }
 }

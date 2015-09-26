@@ -28,6 +28,11 @@ class Patio extends Model
         'unique'    =>  'O(a) :attribute já existe.'
     ];
 
+    public function classes()
+    {
+        return $this->belongsToMany('App\Classe','veiculos','patio_id');
+    }
+
     public function scopePesquisarPorNome($query, $nome)
     {
         return $query->where('pesquisa','like','%'.$nome.'%');

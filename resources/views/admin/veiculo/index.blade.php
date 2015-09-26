@@ -61,11 +61,10 @@
                         <tr>
                             <th style="width: 5%">ID</th>
                             <th style="width: 8%">Placa</th>
-                            <th style="width: 18%">Modelo</th>
+                            <th style="width: 30%">Modelo</th>
                             <th style="width: 12%">Marca</th>
                             <th style="width: 11%">Ano</th>
                             <th style="width: 12%">Status</th>
-                            <th style="width: 12%">Situação</th>
                             <th style="width: 8%">Criado</th>
                             <th style="width: 20%;"></th>
 
@@ -80,7 +79,7 @@
                                 <td>{!! $r->modelo->marca->nome !!}</td>
                                 <td>{!! $r->anomodelo.' / '.$r->anofabricacao !!}</td>
                                 <td><h6 class="inf" style="background: {!! $r->status->cor !!}; color: #ffffff">{!! $r->status->nome !!}</h6></td>
-                                <td>{!! ($r->situacao == 0? "<h6 class='inf inf-danger'>Inativo</h6>":"<h6 class='inf inf-success'>Ativo</h6>") !!}</td>
+
                                 <td>{!! date_format($r->created_at, 'd/m/Y') !!}</td>
                                 <td>
                                     <a href="{!! route('veiculo.detalhes',['id'=>$r->id]) !!}" class="btn btn-social-icon btn-info"><i class="fa fa-eye"></i></a>
@@ -97,6 +96,7 @@
                             <th >Modelo</th>
                             <th >Marca</th>
                             <th >Ano</th>
+                            <th >Status</th>
                             <th>Criado</th>
                             <th ></th>
                         </tr>

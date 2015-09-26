@@ -36,10 +36,21 @@ class CriarConfiguracoesTabela extends Migration
             $tabela->integer('veiculo_prereservado')->default(0);
             $tabela->integer('veiculo_reservado')->default(0);
             $tabela->integer('veiculo_disponivel')->default(0);
+            $tabela->integer('veiculo_indisponivel')->default(0);
 
             $tabela->integer('reparo_novo')->default(0);
             $tabela->integer('reparo_cancelado')->default(0);
             $tabela->integer('reparo_concluido')->default(0);
+
+            $tabela->integer('novo_cliente')->default(0);
+            $tabela->integer('pre_cliente')->default(0);
+            $tabela->integer('inadimplente_cliente')->default(0);
+            $tabela->integer('indisponivel_cliente')->default(0);
+
+            $tabela->integer('locado_contrato');
+            $tabela->integer('cancelado_contrato');
+            $tabela->integer('concluido_contrato');
+            $tabela->integer('pre_contrato');
 
             $tabela->timestamps();
         });

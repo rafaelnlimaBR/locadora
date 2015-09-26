@@ -1,4 +1,29 @@
 $(document).ready(function (){
+    var diasMin =   [ "Do", "Se", "Te", "Qu", "Qi", "Se", "Sa" ];
+    var dias    =   [ "Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sabado" ];
+    var mes     =  [ "Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez" ];
+    var formato =   "dd/mm/yy";
+    $('#data-entrega').datepicker({
+        numberOfMonths: 3,
+        showButtonPanel: true,
+        changeMonth: true,
+        dayNamesMin: diasMin,
+        dayNames: dias,
+        autoSize: true,
+        monthNamesShort: mes,
+        dateFormat: formato
+    });
+    $('#data-devolucao').datepicker({
+        numberOfMonths: 3,
+        showButtonPanel: true,
+        changeMonth: true,
+        dayNamesMin: diasMin,
+        dayNames: dias,
+        autoSize: true,
+        monthNamesShort: mes,
+        dateFormat: formato
+    });
+
 
     var URL = $('#url').val();
 
@@ -28,12 +53,32 @@ $(document).ready(function (){
     })
 
 
-    $('.patios').autocomplete({
+
+    $('.veiculos').autocomplete({
         source: function(request , response){
-            $.get(URL+'/admin/patio/pesquisaajax/'+request.term,function(data){
+            $.get(URL+'/admin/veiculo/pesquisaajax/'+request.term,function(data){
+
                 response ($.map(data.slice(0,5),function(item){
                     return {
-                        label:item.nome+" | "+item.cidade,
+                        label:item.placa,
+                        value:item.placa,
+                        id:item.id
+                    }
+                }));
+            });
+        },
+        select:function (event, ui){
+            $('.id_veiculo').val(ui.item.id);
+
+        }
+    });
+    $('.clientes').autocomplete({
+        source: function(request , response){
+            $.get(URL+'/admin/cliente/pesquisaajax/'+request.term,function(data){
+
+                response ($.map(data.slice(0,5),function(item){
+                    return {
+                        label:item.nome,
                         value:item.nome,
                         id:item.id
                     }
@@ -41,61 +86,27 @@ $(document).ready(function (){
             });
         },
         select:function (event, ui){
-            $('.idpatio').val(ui.item.id);
-            $('.patios').val('');
+            $('.id_cliente').val(ui.item.id);
+
         }
     });
-    $('#botaopatiopesquisa').click(function(){
+    $('.oficinas').autocomplete({
+        source: function(request , response){
+            $.get(URL+'/admin/oficina/pesquisaajax/'+request.term,function(data){
 
-        var idpatio         =   $(".idpatio").val();
-        var idveiculo       =   $('#id-veiculo').val();
-        var token           =   $("input[name=_token]").val();
-
-        if(idpatio == 0){
-            alert("Selecione um patio.");
-            $('.idpatio').onfocus();
-        }else{
-            $.ajax({
-                url: URL+'/admin/veiculo/adicionarpatio',
-                headers: {'X-CSRF-TOKEN': token},
-                type: 'POST',
-                dataType: 'json',
-                data: {
-                    'patio_id'      :   idpatio,
-                    'veiculo_id'    :   idveiculo
-                },
-                success:function(data){
-                    if('error' in data){
-                        alert('Não foi possível adicionar.\n '+data.error);
-                    }else{
-                        $('#tabela-patios').html(data.html);
+                response ($.map(data.slice(0,5),function(item){
+                    return {
+                        label:item.nome,
+                        value:item.nome,
+                        id:item.id
                     }
-                }
+                }));
             });
+        },
+        select:function (event, ui){
+            $('.id_oficina').val(ui.item.id);
 
         }
     });
-    //$( "#descricao-servico" ).autocomplete({
-    //    source: function (request, response){
-    //        var descricao = $('#descricao-servico').val();
-    //        $.post(dominio+'/admin/servico/pesquisar',{"descricao" : descricao}, function(data, status){
-    //            response($.map(data.slice(0, 5), function(item){
-    //                return {
-    //                    label:item.descricao+' | '+item.valor,
-    //                    value:item.descricao,
-    //                    id:item.id,
-    //                    valor:item.valor,
-    //
-    //                };
-    //            }));
-    //
-    //        });
-    //    },
-    //    select:function (event, ui){
-    //        $('#id-servico').val(ui.item.id);
-    //        $('#valor-servico').val(ui.item.valor);
-    //        $('#novovalor-servico').val(ui.item.valor);
-    //
-    //    }
-    //});
+
 });

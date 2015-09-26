@@ -78,13 +78,4 @@ class PatioController extends Controller
         return view('admin.patio.index')->with('patios',$patios);
     }
 
-    public function pesquisaAjax($nome)
-    {
-        return \Response::json(Patio::PesquisarPorNome($nome)->get());
-        if(request()->ajax()){
-            return Patio::PesquisarPorNome($nome);
-        }else{
-            return ['error'=>'Sem permissão.'];
-        }
-    }
 }

@@ -9,6 +9,7 @@
 namespace App\Http\Controllers\Admin;
 
 
+use App\Configuracao;
 use App\Veiculo;
 use Illuminate\Routing\Controller;
 
@@ -35,7 +36,7 @@ class VeiculoController extends Controller
         try{
             $id     =   Veiculo::cadastrar(request());
 
-            return redirect()->route('veiculo.editar',['id'=>$id])->with('alerta',['tipo'=>'success','msg'=>'Cadastrado com sucesso.','icon'=>'check']);
+            return redirect()->route('veiculo.index',['id'=>$id])->with('alerta',['tipo'=>'success','msg'=>'Cadastrado com sucesso.','icon'=>'check']);
         }catch (\Exception $e){
             return redirect()->route('veiculo.index')->with('alerta',['tipo'=>'danger','msg'=>$e->getMessage(),'icon'=>'ban']);
         }
@@ -54,8 +55,13 @@ class VeiculoController extends Controller
 
     public function excluir()
     {
-
-
+        try{
+            Veiculo::excluir(request());
+            return redirect()->route('veiculo.index')->with('alerta',['tipo'=>'success','msg'=>'Excluido com sucesso.','icon'=>'check']);
+        }catch (\Exception $e){
+            return redirect()->route('veiculo.index')->with('alerta',['tipo'=>'danger','msg'=>$e->getMessage(),'icon'=>'ban']);
+        }
+        
 
     }
 
@@ -94,43 +100,36 @@ class VeiculoController extends Controller
 
     }
 
-    public function adicionarPatio()
+
+
+    public function pesquisaajax($id)
     {
-
         if(request()->ajax() == true){
-            try{
-                Veiculo::vincularPatio(request());
-
-                $html   =   view('admin.veiculo.includes.patios')->with('veiculo',Veiculo::find(request()->get('veiculo_id')))->render();
-                return response()->json(['html'=>$html]);
-
-            }catch (\Exception $e){
-                return response()->json(['error'=>$e->getMessage()]);
-            }
-
-
+            return response()->json(Veiculo::PesquisarPlaca($id)->PesquisarStatus(Configuracao::getConf()->veiculo_disponivel)->get());
         }else{
-            return response()->json(['error'=>'Sem permissão.']);
+            return redirect()->route('dashboard');
         }
     }
 
-    public function removerPatio()
+    public function indisponibilizar()
     {
+        try{
+            Veiculo::indisponibilizar(request());
 
-        if(request()->ajax() == true){
-            try{
-                Veiculo::desvincularPatio(request());
+            return redirect()->route('veiculo.index')->with('alerta',['tipo'=>'success','msg'=>'Alterado com sucesso.','icon'=>'check']);
+        }catch (\Exception $e){
+            return redirect()->route('veiculo.index')->with('alerta',['tipo'=>'danger','msg'=>$e->getMessage(),'icon'=>'ban']);
+        }
+    }
 
-                $html   =   view('admin.veiculo.includes.patios')->with('veiculo',Veiculo::find(request()->get('veiculo_id')))->render();
-                return response()->json(['html'=>$html]);
+    public function disponivel()
+    {
+        try{
+            Veiculo::disponibilizar(request());
 
-            }catch (\Exception $e){
-                return response()->json(['error'=>$e->getMessage()]);
-            }
-
-
-        }else{
-            return response()->json(['error'=>'Sem permissão.']);
+            return redirect()->route('veiculo.index')->with('alerta',['tipo'=>'success','msg'=>'Alterado com sucesso.','icon'=>'check']);
+        }catch (\Exception $e){
+            return redirect()->route('veiculo.index')->with('alerta',['tipo'=>'danger','msg'=>$e->getMessage(),'icon'=>'ban']);
         }
     }
 }

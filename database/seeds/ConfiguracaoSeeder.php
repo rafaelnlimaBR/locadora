@@ -14,7 +14,7 @@ class ConfiguracaoSeeder extends Seeder
         DB::table('configuracoes')->insert([
             'empresa'           =>  'Locadora de Carros.',
             'endereco'          =>  'Av. Gomes de Matos',
-            'breve'             =>  'LoCar',
+            'breve'             =>  'Locar',
             'numero'            =>  '1900',
             'bairro'            =>  'Montese',
             'cidade'            =>  'Fortaleza',
@@ -26,10 +26,21 @@ class ConfiguracaoSeeder extends Seeder
             'celular1'          =>  '(85)986607785',
             'celular2'          =>  '(85)988888888',
             'veiculo_novo'      =>  1,
-            'veiculo_reparo'    =>  1,
-            'veiculo_locado'    =>  1,
-            'veiculo_prereservado'      =>  1,
-            'veiculo_reservado' =>  1,
+            'veiculo_reparo'    =>  4,
+            'veiculo_locado'    =>  2,
+            'veiculo_prereservado'      =>  5,
+            'veiculo_reservado' =>  3,
+            'veiculo_disponivel'=>  1,
+            'veiculo_indisponivel'  =>  6,
+            'reparo_novo'       =>  1,
+            'reparo_cancelado'  =>  2,
+            'reparo_concluido'  =>  3,
+            'novo_cliente'      =>  1,
+            'pre_cliente'       =>  4,
+            'inadimplente_cliente'      =>  3,
+            'indisponivel_cliente'  =>  2,
+
+
 
 
 

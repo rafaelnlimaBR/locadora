@@ -3,7 +3,7 @@
 <div class="modal fade" id="form-excluir" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      {!! Form::open((['route'=>['marca.excluir'],'method'=>'post','name'=>'excluir'])) !!}
+      {!! Form::open((['route'=>['veiculo.excluir'],'method'=>'post','name'=>'excluir'])) !!}
       <div class="modal-header ">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">Excluir</h4>

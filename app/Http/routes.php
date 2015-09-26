@@ -21,7 +21,12 @@ Route::get('entrar','Auth\AcessoController@getEntrar');
 Route::post('entrar','Auth\AcessoController@postEntrar');
 
 Route::get('teste',function(){
-    return \App\StatusReparos::all();
+//    return \App\Contrato::find(1)->status()->get();
+//    return \App\Contrato::find(1)->status()
+    dd(\App\Contrato::find(1)->status());
+//
+//    return \App\Contrato::find(1)->status();
+
 });
 //Route::group(['middleware'=>'auth','prefix'=>'admin'],function(){
 Route::group(['prefix'=>'admin'],function(){
@@ -43,6 +48,17 @@ Route::group(['prefix'=>'admin'],function(){
     Route::post('usuario/excluir',   ['as'=>'usuario.excluir','uses'=>'Admin\UsuarioController@excluir']);
     Route::get('usuario/detalhes/{id}', ['as'=>'usuario.detalhes','uses'=>'Admin\UsuarioController@detalhes']);
     Route::post('usuario', ['as'=>'usuario.pesquisa','uses'=>'Admin\UsuarioController@pesquisa']);
+
+//    Rotas Clientes
+    Route::get('cliente',   ['as'=>'cliente.index','uses'=>'Admin\ClienteController@index']);
+    Route::get('cliente/novo',   ['as'=>'cliente.novo','uses'=>'Admin\ClienteController@novo']);
+    Route::post('cliente/cadastrar',   ['as'=>'cliente.cadastrar','uses'=>'Admin\ClienteController@cadastrar']);
+    Route::get('cliente/editar/{id}',   ['as'=>'cliente.editar','uses'=>'Admin\ClienteController@editar']);
+    Route::post('cliente/atualizar',   ['as'=>'cliente.atualizar','uses'=>'Admin\ClienteController@atualizar']);
+    Route::post('cliente/excluir',   ['as'=>'cliente.excluir','uses'=>'Admin\ClienteController@excluir']);
+    Route::get('cliente/detalhes/{id}', ['as'=>'cliente.detalhes','uses'=>'Admin\ClienteController@detalhes']);
+    Route::post('cliente', ['as'=>'cliente.pesquisa','uses'=>'Admin\ClienteController@pesquisa']);
+    Route::get('cliente/pesquisaajax/{nome}',['as' => 'cliente.pesquisaajax','uses' => 'Admin\ClienteController@pesquisaajax']);
 
 //    Rotas Grupo
     Route::get('grupo',['as'=>'grupo.index','uses'=>'Admin\GrupoController@index']);
@@ -100,12 +116,63 @@ Route::group(['prefix'=>'admin'],function(){
     Route::get('veiculo/novo',['as' => 'veiculo.novo','uses' => 'Admin\VeiculoController@novo']);
     Route::get('veiculo/editar/{id}',['as' => 'veiculo.editar','uses' => 'Admin\VeiculoController@editar']);
     Route::get('veiculo/detalhes/{id}',['as' => 'veiculo.detalhes','uses' => 'Admin\VeiculoController@detalhes']);
+    Route::get('veiculo/pesquisaajax/{id}',['as' => 'veiculo.pesquisaajax','uses' => 'Admin\VeiculoController@pesquisaajax']);
     Route::post('veiculo',['as' => 'veiculo.pesquisa','uses' => 'Admin\VeiculoController@pesquisa']);
+    Route::post('veiculo/indisponibilizar',['as' => 'veiculo.indisponibilizar','uses' => 'Admin\VeiculoController@indisponibilizar']);
+    Route::post('veiculo/disponivel',['as' => 'veiculo.disponivel','uses' => 'Admin\VeiculoController@disponivel']);
     Route::post('veiculo/atualizar',['as' => 'veiculo.atualizar','uses' => 'Admin\VeiculoController@atualizar']);
     Route::post('veiculo/cadastrar',['as' => 'veiculo.cadastrar','uses' => 'Admin\VeiculoController@cadastrar']);
     Route::post('veiculo/excluir',['as' => 'veiculo.excluir','uses' => 'Admin\VeiculoController@excluir']);
-    Route::post('veiculo/adicionarpatio',['as' => 'veiculo.adicionarpatio','uses' => 'Admin\VeiculoController@adicionarPatio']);
-    Route::post('veiculo/removerpatio',['as' => 'veiculo.removerpatio','uses' => 'Admin\VeiculoController@removerPatio']);
+
+
+
+//    Rotas Oficina
+    Route::get('oficina',['as'  =>  'oficina.index','uses'  =>  'Admin\OficinaController@index']);
+    Route::get('oficina/novo',['as'  =>  'oficina.novo','uses'  =>  'Admin\OficinaController@novo']);
+    Route::post('oficina/cadastrar',['as'  =>  'oficina.cadastrar','uses'  =>  'Admin\OficinaController@cadastrar']);
+    Route::post('oficina/atualizar',['as'  =>  'oficina.atualizar','uses'  =>  'Admin\OficinaController@atualizar']);
+    Route::post('oficina/excluir',['as'  =>  'oficina.excluir','uses'  =>  'Admin\OficinaController@excluir']);
+    Route::post('oficina',['as'  =>  'oficina.pesquisa','uses'  =>  'Admin\OficinaController@pesquisa']);
+    Route::get('oficina/editar/{id}',['as'  =>  'oficina.editar','uses'  =>  'Admin\OficinaController@editar']);
+    Route::get('oficina/pesquisaajax/{id}',['as'  =>  'oficina.pesquisaajax','uses'  =>  'Admin\OficinaController@pesquisaajax']);
+    Route::get('oficina/detalhes/{id}',['as'  =>  'oficina.detalhes','uses'  =>  'Admin\OficinaController@detalhes']);
+
+//    Rotas Reparos
+    Route::get('reparo',['as'  =>  'reparo.index','uses'  =>  'Admin\ReparoController@index']);
+    Route::get('reparo/novo',['as'  =>  'reparo.novo','uses'  =>  'Admin\ReparoController@novo']);
+    Route::post('reparo/cadastrar',['as'  =>  'reparo.cadastrar','uses'  =>  'Admin\ReparoController@cadastrar']);
+    Route::post('reparo/atualizar',['as'  =>  'reparo.atualizar','uses'  =>  'Admin\ReparoController@atualizar']);
+    Route::post('reparo/excluir',['as'  =>  'reparo.excluir','uses'  =>  'Admin\ReparoController@excluir']);
+    Route::post('reparo',['as'  =>  'reparo.pesquisa','uses'  =>  'Admin\ReparoController@pesquisa']);
+    Route::post('reparo/cancelar',['as'  =>  'reparo.cancelar','uses'  =>  'Admin\ReparoController@cancelar']);
+    Route::post('reparo/finalizar',['as'  =>  'reparo.finalizar','uses'  =>  'Admin\ReparoController@finalizar']);
+    Route::get('reparo/editar/{id}',['as'  =>  'reparo.editar','uses'  =>  'Admin\ReparoController@editar']);
+    Route::get('reparo/detalhes/{id}',['as'  =>  'reparo.detalhes','uses'  =>  'Admin\ReparoController@detalhes']);
+
+//    Rotas Acessorios
+    Route::get('acessorio',['as'  =>  'acessorio.index','uses'  =>  'Admin\AcessorioController@index']);
+    Route::get('acessorio/novo',['as'  =>  'acessorio.novo','uses'  =>  'Admin\AcessorioController@novo']);
+    Route::post('acessorio/cadastrar',['as'  =>  'acessorio.cadastrar','uses'  =>  'Admin\AcessorioController@cadastrar']);
+    Route::post('acessorio/atualizar',['as'  =>  'acessorio.atualizar','uses'  =>  'Admin\AcessorioController@atualizar']);
+    Route::post('acessorio/excluir',['as'  =>  'acessorio.excluir','uses'  =>  'Admin\AcessorioController@excluir']);
+    Route::post('acessorio',['as'  =>  'acessorio.pesquisa','uses'  =>  'Admin\AcessorioController@pesquisa']);
+    Route::post('acessorio/cancelar',['as'  =>  'acessorio.cancelar','uses'  =>  'Admin\AcessorioController@cancelar']);
+    Route::post('acessorio/finalizar',['as'  =>  'acessorio.finalizar','uses'  =>  'Admin\AcessorioController@finalizar']);
+    Route::get('acessorio/editar/{id}',['as'  =>  'acessorio.editar','uses'  =>  'Admin\AcessorioController@editar']);
+    Route::get('acessorio/detalhes/{id}',['as'  =>  'acessorio.detalhes','uses'  =>  'Admin\AcessorioController@detalhes']);
+
+//    Rotas Contrato
+    Route::get('contrato',['as'  =>  'contrato.index','uses'  =>  'Admin\ContratoController@index']);
+    Route::get('contrato/novo',['as'  =>  'contrato.novo','uses'  =>  'Admin\ContratoController@novo']);
+    Route::post('contrato/cadastrar',['as'  =>  'contrato.cadastrar','uses'  =>  'Admin\ContratoController@cadastrar']);
+    Route::post('contrato/atualizar',['as'  =>  'contrato.atualizar','uses'  =>  'Admin\ContratoController@atualizar']);
+    Route::post('contrato/excluir',['as'  =>  'contrato.excluir','uses'  =>  'Admin\ContratoController@excluir']);
+    Route::post('contrato',['as'  =>  'contrato.pesquisa','uses'  =>  'Admin\ContratoController@pesquisa']);
+    Route::post('contrato/cancelar',['as'  =>  'contrato.cancelar','uses'  =>  'Admin\ContratoController@cancelar']);
+    Route::post('contrato/finalizar',['as'  =>  'contrato.finalizar','uses'  =>  'Admin\ContratoController@finalizar']);
+    Route::get('contrato/editar/{id}',['as'  =>  'contrato.editar','uses'  =>  'Admin\ContratoController@editar']);
+    Route::get('contrato/detalhes/{id}',['as'  =>  'contrato.detalhes','uses'  =>  'Admin\ContratoController@detalhes']);
+
 
     View::composer(['admin.usuario.includes.formulario','admin.usuario.index'],function($view) {
         $grupos = \App\Grupo::all();
@@ -143,14 +210,49 @@ Route::group(['prefix'=>'admin'],function(){
         }
         $view->with('classes',$dados);
     });
-    View::composer(['admin.veiculo.includes.formulario','admin.veiculo.index'],function($view) {
+    View::composer(['admin.veiculo.includes.formulario','admin.veiculo.index','admin.contrato.includes.formulario'],function($view) {
         $patios    =   \App\Patio::all();
         $dados = [];
 
         foreach($patios as $g){
-            $dados[$g->id] = $g->nome;
+            $dados[$g->id] = $g->cidade." | ".$g->nome;
         }
         $view->with('patios',$dados);
+    });
+    View::composer(['admin.contrato.includes.formulario'],function($view) {
+        $horarios = [
+            '07:00' =>  '07:00',
+            '07:30' =>  '07:30',
+            '08:00' =>  '08:00',
+            '08:30' =>  '08:30',
+            '09:00' =>  '09:00',
+            '09:30' => '09:30',
+            '10:00' => '10:00',
+            '10:30' => '10:30',
+            '11:00' => '11:00',
+            '11:30' => '11:30',
+            '12:00' => '12:00',
+            '12:30' => '12:30',
+            '13:00' => '13:00',
+            '13:30' => '13:30',
+            '14:00' => '14:00',
+            '14:30' => '14:30',
+            '15:00' => '15:00',
+            '15:30' => '15:30',
+            '16:00' => '16:00',
+            '16:30' => '16:30',
+            '16:30' => '16:30',
+            '17:30' => '17:30',
+            '18:00' => '18:00',
+            '18:30' => '18:30',
+            '19:00' => '19:00',
+            '19:30' => '19:30',
+
+
+        ];
+
+
+        $view->with('horarios',$horarios);
     });
     View::composer(['admin.configuracao.includes.formulario','admin.veiculo.index'],function($view) {
         $statusVeiculos    =   \App\StatusVeiculo::all();
@@ -161,14 +263,59 @@ Route::group(['prefix'=>'admin'],function(){
         }
         $view->with('statusVeiculos',$dados);
     });
-    View::composer(['admin.configuracao.includes.formulario'],function($view) {
-        $statusReparos    =   \App\StatusReparos::all();
+    View::composer(['admin.configuracao.includes.formulario','admin.veiculo.index'],function($view) {
+        $statusContratos    =   \App\StatusContrato::all();
+        $dados = [];
+
+        foreach($statusContratos as $r){
+            $dados[$r->id] = $r->nome;
+        }
+        $view->with('statusContratos',$dados);
+    });
+    View::composer(['admin.configuracao.includes.formulario','admin.cliente.index'],function($view) {
+        $statusClientes    =   \App\StatusCliente::all();
+        $dados = [];
+
+        foreach($statusClientes as $r){
+            $dados[$r->id] = $r->nome;
+        }
+        $view->with('statusClientes',$dados);
+    });
+    View::composer(['admin.configuracao.includes.formulario','admin.reparo.index'],function($view) {
+        $statusReparos    =   \App\StatusReparo::all();
         $dados = [];
 
         foreach($statusReparos as $r){
             $dados[$r->id] = $r->nome;
         }
         $view->with('statusReparos',$dados);
+    });
+    View::composer(['admin.configuracao.includes.formulario','admin.reparo.index'],function($view) {
+        $statusReparos    =   \App\StatusReparo::all();
+        $dados = [];
+
+        foreach($statusReparos as $r){
+            $dados[$r->id] = $r->nome;
+        }
+        $view->with('statusReparos',$dados);
+    });
+    View::composer(['admin.reparo.index'],function($view) {
+        $veiculos    =   \App\Veiculo::all();
+        $dados = [];
+
+        foreach($veiculos as $r){
+            $dados[$r->id] = $r->placa." | ".$r->modelo->nome;
+        }
+        $view->with('veiculos',$dados);
+    });
+    View::composer(['admin.reparo.index'],function($view) {
+        $oficina    =   \App\Oficina::all();
+        $dados = [];
+
+        foreach($oficina as $r){
+            $dados[$r->id] = $r->nome;
+        }
+        $view->with('oficinas',$dados);
     });
 });
 

@@ -101,8 +101,8 @@ class Usuario extends Model implements AuthenticatableContract,
 
         $usuario->grupo()->associate(Grupo::find($req->get('grupo')));
 
-        if(!$usuario->save()){
-            return new \Exception('Não foi possível cadastrar o usuário',200);
+        if($usuario->save() == false){
+            throw new  \Exception('Não foi possível cadastrar o usuário',200);
         }
     }
 
@@ -123,8 +123,8 @@ class Usuario extends Model implements AuthenticatableContract,
 
         $usuario->grupo()->associate(Grupo::find($req->get('grupo')));
 
-        if(!$usuario->save()){
-            return new \Exception('Não foi possível editar o usuário',200);
+        if($usuario->save() == false){
+            throw new  \Exception('Não foi possível editar o usuário',200);
         }
     }
 
@@ -132,8 +132,8 @@ class Usuario extends Model implements AuthenticatableContract,
     {
         $usuario = Usuario::find($req->get('id'));
 
-        if(!$usuario->delete()){
-            return new \Exception('Não foi possível excluir o usuário',200);
+        if($usuario->delete() == false){
+            throw new  \Exception('Não foi possível excluir o usuário',200);
         }
     }
 

@@ -22,7 +22,6 @@ class CriarVeiculosTabela extends Migration
             $tabela->string('cor',100);
             $tabela->string('km',100);
             $tabela->integer('status_id')->unsigned();
-            $tabela->boolean('situacao');
             $tabela->integer('modelo_id')->unsigned();
             $tabela->integer('classe_id')->unsigned()->nullable();
             $tabela->integer('patio_id')->unsigned()->nullable();

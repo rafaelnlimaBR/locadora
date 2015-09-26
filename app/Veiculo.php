@@ -35,11 +35,6 @@ class Veiculo extends Model
         return $this->belongsTo('App\Patio');
     }
 
-    public function patios()
-    {
-        return $this->belongsToMany('App\Patio','patios_veiculos')->withTimestamps();
-    }
-
     public function scopePesquisarStatus($query, $id)
     {
         if($id != 0) {
@@ -60,6 +55,7 @@ class Veiculo extends Model
             return $query->where('classe_id','=',$id);
         }
     }
+
     public function scopePesquisarPlaca($query, $placa)
     {
         return $query->where('placa','like','%'.$placa.'%');
@@ -98,7 +94,6 @@ class Veiculo extends Model
         $veiculo->anomodelo            =   $req->get('anomodelo');
         $veiculo->cor               =   $req->get('cor');
         $veiculo->km                =   $req->get('km');
-        $veiculo->situacao          =   $req->get('situacao');
         $veiculo->classe()->associate(Classe::find($req->get('classe')));
         $veiculo->patio()->associate(Patio::find($req->get('patio')));
         $veiculo->modelo()->associate(Modelo::find($req->get('modelo')));
@@ -119,7 +114,6 @@ class Veiculo extends Model
         $veiculo->anomodelo             =   $req->get('anomodelo');
         $veiculo->cor                   =   $req->get('cor');
         $veiculo->km                    =   $req->get('km');
-        $veiculo->situacao              =   $req->get('situacao');
         $veiculo->classe()->associate(Classe::find($req->get('classe')));
         $veiculo->patio()->associate(Patio::find($req->get('patio')));
         $veiculo->modelo()->associate(Modelo::find($req->get('modelo')));
@@ -128,6 +122,15 @@ class Veiculo extends Model
             throw new \Exception('Não foi possível editar',200);
         }
 
+    }
+
+    public static function excluir(Request $req)
+    {
+        $veiculo    =   Veiculo::find($req->get('id'));
+
+        if($veiculo->delete() == false){
+            throw new \Exception("Não foi possível excluir",200);
+        }
     }
 
     public static function vincularPatio(Request $req)
@@ -157,5 +160,27 @@ class Veiculo extends Model
             ->PesqusiarModelo($req->get('modelos'))
             ->PesquisarPatio($req->get('patios'))
             ->PesquisarClasse($req->get('classes'));
+    }
+
+    public static function indisponibilizar(Request $req)
+    {
+        $veiculo    =   Veiculo::find($req->get('id'));
+
+        $veiculo->status()->associate(StatusVeiculo::find(Configuracao::getConf()->veiculo_indisponivel));
+
+        if($veiculo->save() == false){
+            throw new \Exception('Não foi possível alterar o status do veículo');
+        }
+    }
+
+    public static function disponibilizar(Request $req)
+    {
+        $veiculo    =   Veiculo::find($req->get('id'));
+
+        $veiculo->status()->associate(StatusVeiculo::find(Configuracao::getConf()->veiculo_disponivel));
+
+        if($veiculo->save() == false){
+            throw new \Exception('Não foi possível alterar o status do veículo');
+        }
     }
 }

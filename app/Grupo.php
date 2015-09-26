@@ -62,7 +62,7 @@ class Grupo extends Model
             'det'   =>  $req->get('gru-det')
         ]);
         $grupo->situacao = $req->situacao;
-        if(!$grupo->save() == false){
+        if($grupo->save() == false){
             throw  new \Exception('Não foi possível cadastrar.',200);
         }
     }
@@ -86,7 +86,7 @@ class Grupo extends Model
             'det'   =>  $req->get('gru-det')
         ]);
         $grupo->situacao = $req->situacao;
-        if(!$grupo->save() == false){
+        if($grupo->save() == false){
             throw new \Exception('Não foi possível cadastrar.',200);
         }
     }
@@ -95,7 +95,7 @@ class Grupo extends Model
     {
         $grupo = Grupo::find($req->get('id'));
 
-        if(!$grupo->delete() == false){
+        if($grupo->delete() == false){
             throw new \Exception('Não foi possível excluir esse registro',200);
         }
     }

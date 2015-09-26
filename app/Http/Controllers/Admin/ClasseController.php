@@ -25,7 +25,7 @@ class ClasseController extends Controller
         return view('admin.classe.novo');
     }
 
-    public static function cadastrar()
+    public function cadastrar()
     {
         $validacao = Classe::validacao(request()->all());
         if($validacao->fails()){
