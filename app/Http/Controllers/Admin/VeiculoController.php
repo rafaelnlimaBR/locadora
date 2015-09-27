@@ -34,9 +34,9 @@ class VeiculoController extends Controller
             return redirect()->route('veiculo.novo')->withErrors($validacao)->withInput();
         }
         try{
-            $id     =   Veiculo::cadastrar(request());
+            Veiculo::cadastrar(request());
 
-            return redirect()->route('veiculo.index',['id'=>$id])->with('alerta',['tipo'=>'success','msg'=>'Cadastrado com sucesso.','icon'=>'check']);
+            return redirect()->route('veiculo.index')->with('alerta',['tipo'=>'success','msg'=>'Cadastrado com sucesso.','icon'=>'check']);
         }catch (\Exception $e){
             return redirect()->route('veiculo.index')->with('alerta',['tipo'=>'danger','msg'=>$e->getMessage(),'icon'=>'ban']);
         }

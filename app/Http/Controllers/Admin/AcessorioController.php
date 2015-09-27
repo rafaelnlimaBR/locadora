@@ -72,8 +72,8 @@ class AcessorioController extends Controller
 
     public function pesquisa()
     {
-        $marcas = Marca::PesquisarPorNome(request()->get('nome'))->paginate(15);
-        return view('admin.marca.index')->with('marcas',$marcas);
+        $acessorio = Acessorio::pesquisar(request())->paginate(10);
+        return view('admin.acessorio.index')->with('acessorios',$acessorio);
     }
 
     public function atualizar()

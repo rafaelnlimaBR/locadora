@@ -22,10 +22,13 @@
 
                 </div>
                 {!! Form::close() !!}
+
             </div>
         </div>
 
     </div>
-
+@include('admin.contrato.includes.cancelar')
+@include('admin.contrato.includes.locar')
+@include('admin.contrato.includes.finalizar')
 
 @endsection

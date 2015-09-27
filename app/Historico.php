@@ -20,4 +20,9 @@ class Historico extends Model
     {
         return $this->belongsTo('App\StatusContrato');
     }
+
+    public function scopeUltimoRegistro($query)
+    {
+        return $query->orderBy('created_at','desc');
+    }
 }

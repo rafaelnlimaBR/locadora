@@ -4,7 +4,8 @@
     <div class="row">
         <div class="col-xs-12">
             <div class="botoes">
-                <a href="{!! route('contrato.novo') !!}" class="btn btn-success"><i class="fa fa-plus"> </i>  Novo Registro</a>
+                <a href="{!! route('contrato.novo') !!}" class="btn btn-success"><i class="fa fa-plus"> </i>  Nova Locação</a>
+                <a href="{!! route('contrato.reserva') !!}" class="btn btn-warning"><i class="fa fa-plus"> </i>  Nova Reserva</a>
             </div>
         </div>
     </div>
@@ -52,7 +53,7 @@
                                <td>{!! $r->cliente->nome !!}</td>
                                <td>{!! $r->veiculo->placa !!}</td>
                                <td>{!! $r->veiculo->modelo->nome !!}</td>
-                                <td><h6 class="inf" style="background: {!! $r->status()->orderBy('id', 'desc')->first()->cor !!}; color: #ffffff;">{!! $r->status()->orderBy('id', 'desc')->first()->nome !!}</h6></td>
+                                <td><h6 class="inf" style="background: {!! $r->historicos()->ultimoregistro()->first()->status()->first()->cor!!}; color: #ffffff;">{!! $r->historicos()->ultimoregistro()->first()->status()->first()->nome !!}</h6></td>
                                 <td>{!! date_format($r->created_at , 'd/m/Y') !!}</td>
                                 <td>
                                     <a href="{!! route('contrato.detalhes',['id'=>$r->id]) !!}" class="btn btn-social-icon btn-info"><i class="fa fa-eye"></i></a>

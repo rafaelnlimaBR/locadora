@@ -2,7 +2,7 @@ $(document).ready(function (){
     var diasMin =   [ "Do", "Se", "Te", "Qu", "Qi", "Se", "Sa" ];
     var dias    =   [ "Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sabado" ];
     var mes     =  [ "Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez" ];
-    var formato =   "dd/mm/yy";
+    var formato =   "dd-mm-yy";
     $('#data-entrega').datepicker({
         numberOfMonths: 3,
         showButtonPanel: true,
@@ -108,5 +108,7 @@ $(document).ready(function (){
 
         }
     });
+
+
 
 });

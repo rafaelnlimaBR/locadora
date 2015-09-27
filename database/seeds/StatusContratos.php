@@ -34,8 +34,15 @@ class StatusContratos extends Seeder
         ]);
         DB::table('status_contratos')->insert([
             'nome'      =>  'Pre-Reservado',
-            'cor' =>  '#FFA500',
+            'cor' =>  '#D2691E',
             'descricao' =>  'Contrato pre reservado.',
+            'created_at'  =>  new DateTime(),
+            'updated_at'  =>  new DateTime(),
+        ]);
+        DB::table('status_contratos')->insert([
+            'nome'      =>  'Reservado',
+            'cor' =>  '#FFA500',
+            'descricao' =>  'Contrato reservado.',
             'created_at'  =>  new DateTime(),
             'updated_at'  =>  new DateTime(),
         ]);

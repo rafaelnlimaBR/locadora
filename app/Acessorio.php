@@ -74,4 +74,9 @@ class Acessorio extends Model
             throw new \Exception('Não foi possível excluir.',200);
         }
     }
+
+    public static function pesquisar(Request $req)
+    {
+        return Acessorio::PesquisarPorNome($req->get('nome'));
+    }
 }

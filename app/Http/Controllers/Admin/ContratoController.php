@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Contrato;
+use App\Veiculo;
 use Illuminate\Routing\Controller;
 
 class ContratoController extends Controller
@@ -22,6 +23,8 @@ class ContratoController extends Controller
         return \View::make('admin.contrato.novo');
     }
     public function cadastrar(){
+
+
 
         $validacao = Contrato::validacao(request()->all());
 
@@ -41,6 +44,43 @@ class ContratoController extends Controller
         }
 
     }
+
+    public function reserva()
+    {
+        return view('admin.contrato.reserva');
+    }
+
+    public function reservar()
+    {
+        $validacao = Contrato::validacao(request()->all());
+
+        if($validacao->fails()){
+            return redirect()->route('contrato.reserva')->withErrors($validacao)->withInput();
+        }
+
+
+        try{
+            $id     =   Contrato::cadastrar(request());
+
+            return redirect()->route('contrato.editar',['id'    =>  $id])->with('alerta',['tipo'=>'success','msg'=>'Cadastrado com sucesso.','icon'=>'check']);
+
+
+        }catch (\Exception $e){
+            return redirect()->route('contrato.index')->with('alerta',['tipo'=>'danger','msg'=>$e->getMessage(),'icon'=>'ban']);
+        }
+    }
+
+
+    public function locar()
+    {
+        try{
+
+            Contrato::locar(request());
+            return redirect()->route('contrato.index')->with('alerta',['tipo'=>'success','msg'=>'Excluido com sucesso.','icon'=>'check']);
+        }catch (\Exception $e){
+            return redirect()->route('contrato.index')->with('alerta',['tipo'=>'danger','msg'=>$e->getMessage(),'icon'=>'ban']);
+        }
+    }
     public function editar($id){
         $contrato   =   Contrato::find($id);
         if($contrato == null){
@@ -49,26 +89,27 @@ class ContratoController extends Controller
         return view('admin.contrato.edicao')->with('contrato',$contrato);
     }
     public function atualizar(){
-        $validacao = Cliente::validacao(request()->all());
+        $validacao = Contrato::validacao(request()->all());
 
         if($validacao->fails()){
-            return redirect()->route('cliente.editar',['id'=>request()->get('id')])->withErrors($validacao)->withInput();
+            return redirect()->route('contrato.editar',['id'=>request()->get('id')])->withErrors($validacao)->withInput();
         }
 
         try {
-            Cliente::atualizar(request());
-            return redirect()->route('cliente.index')->with('alerta',['tipo'=>'success','msg'=>'Editado com sucesso.','icon'=>'check']);
+            Contrato::editar(request());
+            return redirect()->route('contrato.index')->with('alerta',['tipo'=>'success','msg'=>'Editado com sucesso.','icon'=>'check']);
         }catch (\Exception $e){
-            return redirect()->route('cliente.index')->with('alerta',['tipo'=>'danger','msg'=>$e->getMessage(),'icon'=>'ban']);
+            return redirect()->route('contrato.index')->with('alerta',['tipo'=>'danger','msg'=>$e->getMessage(),'icon'=>'ban']);
         }
     }
     public function excluir(){
 
+
         try{
-            Cliente::excluir(request());
-            return redirect()->route('cliente.index')->with('alerta',['tipo'=>'success','msg'=>'Excluido com sucesso.','icon'=>'check']);
+            Contrato::excluir(request());
+            return redirect()->route('contrato.index')->with('alerta',['tipo'=>'success','msg'=>'Excluido com sucesso.','icon'=>'check']);
         }catch (\Exception $e){
-            return redirect()->route('cliente.index')->with('alerta',['tipo'=>'danger','msg'=>$e->getMessage(),'icon'=>'ban']);
+            return redirect()->route('contrato.index')->with('alerta',['tipo'=>'danger','msg'=>$e->getMessage(),'icon'=>'ban']);
         }
     }
 
@@ -87,4 +128,32 @@ class ContratoController extends Controller
 
         return view('admin.cliente.index')->with('clientes',$cliente);
     }
+
+    public function cancelar()
+    {
+
+        try{
+
+            Contrato::cancelar(request());
+            return redirect()->route('contrato.index')->with('alerta',['tipo'=>'success','msg'=>'Cancelado com sucesso.','icon'=>'check']);
+        }catch (\Exception $e){
+            return redirect()->route('contrato.index')->with('alerta',['tipo'=>'danger','msg'=>$e->getMessage(),'icon'=>'ban']);
+        }
+
+    }
+
+    public function finalizar()
+    {
+        try{
+
+            Contrato::finalizar(request());
+            return redirect()->route('contrato.index')->with('alerta',['tipo'=>'success','msg'=>'Finalizado com sucesso.','icon'=>'check']);
+        }catch (\Exception $e){
+            return redirect()->route('contrato.index')->with('alerta',['tipo'=>'danger','msg'=>$e->getMessage(),'icon'=>'ban']);
+        }
+
+    }
+
+
+
 }

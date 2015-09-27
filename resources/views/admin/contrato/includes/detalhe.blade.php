@@ -18,19 +18,19 @@
                         <li class="time-label">
                             <span class="bg-green" >{!!  date_format($contrato->created_at , 'd/m/Y') !!}</span> Contrato Criado
                         </li>
-                        @foreach($contrato->status as $r)
-                            {!! $r->id !!}
+                        @foreach($contrato->historicos as $r)
+
                             <li>
-                                <i class="bg" style="background: {!! $r->cor !!}"> {!! $r->nome !!}</i>
+                                <i class="bg" style="background: {!! $r->status->cor !!}"> {!! $r->status->nome !!}</i>
                                 <div class="timeline-item">
                                     <span class="time">
-                                        <i class="fa fa-clock-o"> </i> {!! $r->pivot->criado !!}
+                                        <i class="fa fa-clock-o"> </i> {!! $r->criado !!}
                                     </span>
-                                        <h3 class="timeline-header"><a href="#">{!! $r->nome !!}</a>
+                                        <h3 class="timeline-header"><a href="#">{!! $r->status->nome !!}</a>
                                         {!! $r->descricao !!}
                                     </h3>
                                     <div class="timeline-body">
-                                        {!! $r->pivot->descricao !!}
+                                        {!! $r->descricao !!}
                                     </div>
                                 </div>
                             </li>

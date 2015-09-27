@@ -22,7 +22,7 @@ class CriarStatusHistoricoTabela extends Migration
             $tabela->timestamp('criado');
             $tabela->timestamps();
 
-            $tabela->foreign('contrato_id')->references('id')->on('contratos');
+            $tabela->foreign('contrato_id')->references('id')->on('contratos')->onDelete('cascade');
             $tabela->foreign('status_id')->references('id')->on('status_contratos');
         });
     }

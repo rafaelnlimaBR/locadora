@@ -54,6 +54,7 @@ class Configuracao extends Model
         $conf->cancelado_contrato           =   $req->get('cancelado_contrato');
         $conf->concluido_contrato           =   $req->get('concluido_contrato');
         $conf->pre_contrato                 =   $req->get('pre_contrato');
+        $conf->reservado_contrato                 =   $req->get('reservado_contrato');
 
 
         if($conf->save() == false){

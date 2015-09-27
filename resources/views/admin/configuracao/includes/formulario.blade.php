@@ -196,6 +196,11 @@
                     {!! Form::select('pre_contrato',$statusContratos, (isset($conf)?$conf->pre_contrato :1), ['class'=>'form-control']) !!}
 
                 </div>
+                <div class="form-group col-xs-2">
+                    {!! Form::label('reservado_contrato','Reservado') !!}
+                    {!! Form::select('reservado_contrato',$statusContratos, (isset($conf)?$conf->reservado_contrato :1), ['class'=>'form-control']) !!}
+
+                </div>
             </div>
         </div>
     </div>

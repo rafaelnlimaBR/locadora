@@ -4,13 +4,13 @@
     <div class="row">
         <div class="col-xs-12">
             <div class="box box-success">
-                {!! Form::open(['route'=>['contrato.cadastrar'],'method'=>'post','files' => true]) !!}
+                {!! Form::open(['route'=>['contrato.reservar'],'method'=>'post','files' => true]) !!}
                 <div class="box-header with-border">
                     <h3 class="box-title" x>Pagina teste</h3>
                 </div>
                 <div class="box-body">
 
-                    @include('admin.contrato.includes.formulario',['status'=>\App\Configuracao::getConf()->locado_contrato])
+                    @include('admin.contrato.includes.formulario',['status'=>\App\Configuracao::getConf()->reservado_contrato])
 
                 </div>
                 <div class="box-footer">

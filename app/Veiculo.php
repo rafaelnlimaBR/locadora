@@ -102,7 +102,7 @@ class Veiculo extends Model
         if($veiculo->save() == false){
              throw new \Exception('Não foi possível cadastrar',200);
         }
-        return $veiculo->id;
+
 
     }
     public static function editar(Request $req)
@@ -181,6 +181,22 @@ class Veiculo extends Model
 
         if($veiculo->save() == false){
             throw new \Exception('Não foi possível alterar o status do veículo');
+        }
+    }
+
+    public static function altarStatus($id, $status)
+    {
+        $veiculo    =   Veiculo::find($id);
+        if($veiculo != null){
+            $status =   StatusVeiculo::find($status);
+            if($status != null){
+                $veiculo->status()->associate($status);
+                return true;
+            }else{
+                return false;
+            }
+        }else{
+            return false;
         }
     }
 }

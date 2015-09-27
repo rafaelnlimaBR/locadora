@@ -248,11 +248,9 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="{!! route('contrato.index') !!}"><i class="fa fa-circle-o"></i> Contrato</a></li>
-                        <li><a href="{!! route('oficina.index') !!}"><i class="fa fa-circle-o"></i> Multa</a></li>
+
                         <li><a href="{!! route('acessorio.index') !!}"><i class="fa fa-circle-o"></i> Acessório</a></li>
-                        <li><a href="{!! route('oficina.index') !!}"><i class="fa fa-circle-o"></i> Promoção</a></li>
-                        <li><a href="{!! route('oficina.index') !!}"><i class="fa fa-circle-o"></i> Taxa</a></li>
-                        <li><a href="{!! route('oficina.index') !!}"><i class="fa fa-circle-o"></i> Seguro</a></li>
+
                     </ul>
                 </li>
 

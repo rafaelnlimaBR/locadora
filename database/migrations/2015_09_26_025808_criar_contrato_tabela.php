@@ -22,6 +22,8 @@ class CriarContratoTabela extends Migration
             $tabela->integer('patio_devolucao')->unsigned()->nullable();
             $tabela->date('data_entrega');
             $tabela->date('data_devolucao');
+            $tabela->string('hora_entrega');
+            $tabela->string('hora_devolucao');
             $tabela->text('obs');
             $tabela->timestamps();
 

@@ -51,6 +51,7 @@ class CriarConfiguracoesTabela extends Migration
             $tabela->integer('cancelado_contrato');
             $tabela->integer('concluido_contrato');
             $tabela->integer('pre_contrato');
+            $tabela->integer('reservado_contrato');
 
             $tabela->timestamps();
         });

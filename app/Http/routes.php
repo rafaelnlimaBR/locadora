@@ -21,12 +21,7 @@ Route::get('entrar','Auth\AcessoController@getEntrar');
 Route::post('entrar','Auth\AcessoController@postEntrar');
 
 Route::get('teste',function(){
-//    return \App\Contrato::find(1)->status()->get();
-//    return \App\Contrato::find(1)->status()
-    dd(\App\Contrato::find(1)->status());
-//
-//    return \App\Contrato::find(1)->status();
-
+    return \App\Contrato::find(14)->historicos()->ultimoregistro()->first()->status()->first()->nome;
 });
 //Route::group(['middleware'=>'auth','prefix'=>'admin'],function(){
 Route::group(['prefix'=>'admin'],function(){
@@ -170,6 +165,11 @@ Route::group(['prefix'=>'admin'],function(){
     Route::post('contrato',['as'  =>  'contrato.pesquisa','uses'  =>  'Admin\ContratoController@pesquisa']);
     Route::post('contrato/cancelar',['as'  =>  'contrato.cancelar','uses'  =>  'Admin\ContratoController@cancelar']);
     Route::post('contrato/finalizar',['as'  =>  'contrato.finalizar','uses'  =>  'Admin\ContratoController@finalizar']);
+    Route::post('contrato/cancelar',['as'  =>  'contrato.cancelar','uses'  =>  'Admin\ContratoController@cancelar']);
+    Route::post('contrato/locar',['as'  =>  'contrato.locar','uses'  =>  'Admin\ContratoController@locar']);
+    Route::post('contrato/finalizar',['as'  =>  'contrato.finalizar','uses'  =>  'Admin\ContratoController@finalizar']);
+    Route::post('contrato/reservar',['as'  =>  'contrato.reservar','uses'  =>  'Admin\ContratoController@reservar']);
+    Route::get('contrato/reserva',['as'  =>  'contrato.reserva','uses'  =>  'Admin\ContratoController@reserva']);
     Route::get('contrato/editar/{id}',['as'  =>  'contrato.editar','uses'  =>  'Admin\ContratoController@editar']);
     Route::get('contrato/detalhes/{id}',['as'  =>  'contrato.detalhes','uses'  =>  'Admin\ContratoController@detalhes']);
 

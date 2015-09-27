@@ -1,5 +1,7 @@
 <div>
-
+@if(isset($status))
+        {!! $status !!}
+        @endif
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">
         <li role="presentation" class="active"><a href="#dados" aria-controls="dados" role="tab" data-toggle="tab">Home</a></li>
@@ -22,7 +24,8 @@
                     {!! Form::label('cliente','Cliente') !!}
                     {!! Form::text('cliente',(isset($contrato)?$contrato->cliente->nome:''),['class'=>'form-control clientes',]) !!}
                     {!! Form::hidden('id_cliente',(isset($contrato)?$contrato->cliente->id:''),['class'=>'id_cliente']) !!}
-                    {!! ($errors->has('cliente')? "<p class='msg-alerta'>".$errors->first('cliente')."</p>":"") !!}
+                    {!! Form::hidden('status_id',(isset($status)?$status:'')) !!}
+                    {!! ($errors->has('id_cliente')? "<p class='msg-alerta'>".$errors->first('id_cliente')."</p>":"") !!}
                 </div>
                 <div class="form-group col-lg-6">
 
@@ -30,7 +33,7 @@
                     {!! Form::label('veiculo','Veiculo') !!}
                     {!! Form::text('veiculo',(isset($contrato)?$contrato->veiculo->placa:''),['class'=>'form-control veiculos',]) !!}
                     {!! Form::hidden('id_veiculo',(isset($contrato)?$contrato->veiculo->id:''),['class'=>'id_veiculo']) !!}
-                    {!! ($errors->has('veiculo')? "<p class='msg-alerta'>".$errors->first('veiculo')."</p>":"") !!}
+                    {!! ($errors->has('id_veiculo')? "<p class='msg-alerta'>".$errors->first('id_veiculo')."</p>":"") !!}
                 </div>
             </div>
             <div class="row">
@@ -38,14 +41,14 @@
 
 
                     {!! Form::label('dataentrega','Data Entrega') !!}
-                    {!! Form::text('dataentrega',(isset($contrato)?$contrato->data_entrega:''),['class'=>'form-control','id'=>'data-entrega',]) !!}
+                    {!! Form::text('dataentrega',(isset($contrato)?date('d-m-Y',strtotime($contrato->data_entrega)):''),['class'=>'form-control','id'=>'data-entrega',]) !!}
                     {!! ($errors->has('dataentrega')? "<p class='msg-alerta'>".$errors->first('dataentrega')."</p>":"") !!}
                 </div>
                 <div class="form-group col-lg-1">
 
 
                     {!! Form::label('horaEntrega','Hora') !!}
-                    {!! Form::select('horaEntrega',$horarios, (isset($contrato)?$contrato->patio_entrega:''), ['class'=>'form-control']) !!}
+                    {!! Form::select('horaEntrega',$horarios, (isset($contrato)?$contrato->hora_entrega:''), ['class'=>'form-control']) !!}
                     {!! ($errors->has('horaEntrega')? "<p class='msg-alerta'>".$errors->first('horaEntrega')."</p>":"") !!}
                 </div>
                 <div class="form-group col-lg-3">
@@ -58,16 +61,16 @@
                 <div class="form-group col-lg-2">
 
 
-                    {!! Form::label('dataentrega','Data Entrega') !!}
-                    {!! Form::text('dataentrega',(isset($contrato)?$contrato->data_entrega:''),['class'=>'form-control veiculos','id'=>'data-devolucao']) !!}
-                    {!! ($errors->has('dataentrega')? "<p class='msg-alerta'>".$errors->first('dataentrega')."</p>":"") !!}
+                    {!! Form::label('datadevolucao','Data Devolucao') !!}
+                    {!! Form::text('datadevolucao',(isset($contrato)?date('d-m-Y',strtotime($contrato->data_devolucao)):''),['class'=>'form-control ','id'=>'data-devolucao']) !!}
+                    {!! ($errors->has('datadevolucao')? "<p class='msg-alerta'>".$errors->first('datadevolucao')."</p>":"") !!}
                 </div>
                 <div class="form-group col-lg-1">
 
 
-                    {!! Form::label('patioDevolucao','Horario') !!}
-                    {!! Form::select('patioDevolucao',$horarios, (isset($contrato)?$contrato->patio_entrega:''), ['class'=>'form-control']) !!}
-                    {!! ($errors->has('patioDevolucao')? "<p class='msg-alerta'>".$errors->first('patioDevolucao')."</p>":"") !!}
+                    {!! Form::label('horadevolucao','Horario') !!}
+                    {!! Form::select('horadevolucao',$horarios, (isset($contrato)?$contrato->patio_entrega:''), ['class'=>'form-control']) !!}
+                    {!! ($errors->has('horadevolucao')? "<p class='msg-alerta'>".$errors->first('horadevolucao')."</p>":"") !!}
                 </div>
                 <div class="form-group col-lg-3">
 
@@ -80,7 +83,7 @@
             <div class="row">
                 <div class="form-group col-lg-12">
                     {!! Form::label('obs','Observação') !!}
-                    {!! Form::textarea('obs',(isset($contrato)?$contrato->obs:''),['class'=>'form-control veiculos',]) !!}
+                    {!! Form::textarea('obs',(isset($contrato)?$contrato->obs:''),['class'=>'form-control',]) !!}
                     {!! ($errors->has('obs')? "<p class='msg-alerta'>".$errors->first('obs')."</p>":"") !!}
                 </div>
             </div>
@@ -97,4 +100,15 @@
     </div>
 
 </div>
+@if(isset($contrato))
+    @if(\App\Configuracao::getConf()->locado_contrato == $contrato->historicos()->ultimoregistro()->first()->status_id)
+        <a href="#" class="btn btn-info" data-toggle="modal" data-target="#form-finalizar"> Finalizar</a>
+
+    @elseif(\App\Configuracao::getConf()->pre_contrato == $contrato->historicos()->ultimoregistro()->first()->status_id or  \App\Configuracao::getConf()->reservado_contrato == $contrato->historicos()->ultimoregistro()->first()->status_id)
+        <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#form-cancelar"> Cancelar</a>
+        <a href="#" class="btn btn-success" data-toggle="modal" data-target="#form-locar"> Locar</a>
+    @endif
+
+
+@endif
 
